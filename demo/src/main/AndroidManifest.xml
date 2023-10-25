@@ -9,18 +9,18 @@
       android:label="@string/app_name"
       android:supportsRtl="true"
       android:theme="@style/AppTheme" >
-        <activity android:name=".MainActivity" >
+        <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BuildingPlansTileViewActivity" />
-        <activity android:name=".FictionalMapTileViewActivity" />
-        <activity android:name=".LargeImageTileViewActivity" />
-        <activity android:name=".RealMapTileViewActivity" />
-        <activity android:name=".RealMapInternetTileViewActivity" />
+        <activity android:name=".BuildingPlansTileViewActivity" android:exported="false"/>
+        <activity android:name=".FictionalMapTileViewActivity" android:exported="false"/>
+        <activity android:name=".LargeImageTileViewActivity" android:exported="false"/>
+        <activity android:name=".RealMapTileViewActivity" android:exported="false"/>
+        <activity android:name=".RealMapInternetTileViewActivity" android:exported="false"/>
     </application>
 
 </manifest>

@@ -1,13 +1,13 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+    id 'maven-publish'
+}
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "21.1.2"
+    compileSdk 34
     defaultConfig {
-        minSdkVersion 11
-        targetSdkVersion 23
-        versionCode 40
-        versionName "2.2.9"
+        minSdkVersion 21
+        targetSdkVersion 34
     }
     buildTypes {
         release {
@@ -21,9 +21,54 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.2.1'
+    testImplementation 'junit:junit:4.12'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:23.2.1'
 }
 
-apply from: 'aar-release.gradle'
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = 'com.github.smartapps-fr'
+                artifactId = 'tileview'
+                version = '1.0.0'
+
+                pom {
+                    packaging 'aar'
+                    groupId 'com.github.smartapps-fr'
+                    artifactId 'tileview'
+
+                    // Add your description here
+                    name = 'tileview'
+                    description = 'TileView fork to maintain Smartapps libraries'
+                    url = 'https://smartapps.fr/'
+
+                    // Set your license
+                    licenses {
+                        license {
+                            name = 'The Apache Software License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'smartapps'
+                            name = 'Smartapps'
+                            email = 'dd@smartapps.fr'
+                        }
+                    }
+                    scm {
+                        connection = 'https://github.com/smartapps-fr/tileview.git'
+                        developerConnection = 'https://github.com/smartapps-fr/tileview.git'
+                        tag = '1.0.0'
+                        url = 'https://github.com/smartapps-fr/tileview.git'
+
+                    }
+                }
+            }
+        }
+    }
+}
